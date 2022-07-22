@@ -11,15 +11,15 @@ function ArticleLatest() {
 
         <div className="latest-news__list spacing">
           <div className="latest-news__card">
-            <ArticleItem />
+            <ArticleItem desc={false} />
           </div>
 
           <div className="latest-news__card">
-            <ArticleItem />
+            <ArticleItem desc={false} />
           </div>
 
           <div className="latest-news__card">
-            <ArticleItem />
+            <ArticleItem desc={false} />
           </div>
         </div>
       </div>

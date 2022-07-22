@@ -6,13 +6,10 @@ function ArticlePopular() {
   return (
     <div className="popular-news section bg-white-blue">
       <div className="tcl-container">
-        {/* Main Title */}
         <MainTitle isButton={true} button={<Button type="default" loading={false}>View more</Button>} >Popular Articles</MainTitle>
-        {/* End Main Title */}
         <div className="popular-news__list spacing">
           <div className="popular-news__list--left">
             <div className="popular-news__list--row">
-              {/* Popular news card */}
               <div className="popular-news__list--card">
                 <article className="article-item style-card">
                   <div className="article-item__thumbnail">
@@ -60,8 +57,6 @@ function ArticlePopular() {
                   </div>
                 </article>
               </div>
-              {/* End Popular news card */}
-              {/* Popular news card */}
               <div className="popular-news__list--card">
                 <article className="article-item style-card">
                   <div className="article-item__thumbnail">
