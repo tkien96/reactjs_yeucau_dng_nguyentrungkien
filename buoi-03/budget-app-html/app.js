@@ -3,12 +3,12 @@ const eleListIncomes = document.querySelector("#list-incomes"),
       eleListExpenses = document.querySelector("#list-expenses"),
       budgetIncome = document.querySelector(".budget__income--value"),
       budgetExpenses = document.querySelector(".budget__expenses--value"),
-      budgetValue = document.querySelector(".budget__value");
-      budgetPercent = document.querySelector(".budget__expenses--percentage");
-      addType = document.querySelector(".add__type");
-      addDescription = document.querySelector(".add__description");
-      addValue = document.querySelector(".add__value");
-      addBtn = document.querySelector(".add__btn");
+      budgetValue = document.querySelector(".budget__value"),
+      budgetPercent = document.querySelector(".budget__expenses--percentage"),
+      addType = document.querySelector(".add__type"),
+      addDescription = document.querySelector(".add__description"),
+      addValue = document.querySelector(".add__value"),
+      addBtn = document.querySelector(".add__btn")
 // Data
 let listDefault = [
   {
@@ -143,13 +143,14 @@ function formatPercentAmount(amount, total) {
 }
 
 addType.addEventListener("change", (e) => {
+  resetClassName()
   if (e.target.value === "exp") {
-    addType.className += " red-focus";
-    addDescription.className += " red-focus";
-    addValue.className += " red-focus";
-    addBtn.className += " red";
+    addType.className += " red-focus"
+    addDescription.className += " red-focus"
+    addValue.className += " red-focus"
+    addBtn.className += " red"
   }
-});
+})
 
 addBtn.addEventListener("click", () => {
   let type = addType.value;
@@ -168,7 +169,7 @@ addBtn.addEventListener("click", () => {
     addValue.focus();
     return alert("value is a positive number");
   }
-
+  
   listData.push({
     id: createUUID(),
     description: description,
