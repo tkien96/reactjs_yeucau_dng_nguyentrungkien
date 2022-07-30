@@ -33,9 +33,7 @@ let listDefault = [
   },
 ];
 
-let listData = JSON.parse(localStorage.getItem("dataStorage")).length > 0
-  ? JSON.parse(localStorage.getItem("dataStorage"))
-  : listDefault;
+let listData = JSON.parse(localStorage.getItem("dataStorage")) || listDefault;
 
 renderBudgetList();
 
