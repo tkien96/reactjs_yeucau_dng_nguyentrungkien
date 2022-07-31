@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux'
 import { calTotalAmount } from "../helper"
 
 function BudgetContainer () {
-    const listIncomes = useSelector(state => state.listDataIncome).filter((dataItem) => dataItem.amount > 0)
-    const listExpenses = useSelector(state => state.listDataIncome).filter((dataItem) => dataItem.amount < 0)
+    const datas = useSelector(state => state);
+    const listIncomes = datas.listDataIncome.filter((dataItem) => dataItem.amount > 0)
+    const listExpenses = datas.listDataIncome.filter((dataItem) => dataItem.amount < 0)
     const total = calTotalAmount(listIncomes)
     return (
         <div className="container clearfix">

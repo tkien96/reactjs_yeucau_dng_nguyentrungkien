@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux'
 import { calTotalAmount } from "../helper"
 
 function BudgetHeader () {
-    const listIncomes = useSelector(state => state.listDataIncome).filter((dataItem) => dataItem.amount > 0)
-    const listExpenses = useSelector(state => state.listDataIncome).filter((dataItem) => dataItem.amount < 0)
+    const listIncomes = useSelector(state => state).listDataIncome.filter((dataItem) => dataItem.amount > 0)
+    const listExpenses = useSelector(state => state).listDataIncome.filter((dataItem) => dataItem.amount < 0)
     const totalIncomes = calTotalAmount(listIncomes)
     const totalExpenses = calTotalAmount(listExpenses)
+    
     return (
         <div className="top">
             <div className="budget">

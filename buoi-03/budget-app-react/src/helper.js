@@ -41,3 +41,27 @@ export function formatPercentAmount(amount, total) {
 
   return percent + "%";
 }
+
+export function setStorage(name, item) {
+  localStorage.setItem(name, JSON.stringify(item));
+}
+
+export function getStorage(name){
+  return JSON.parse(localStorage.getItem(name))
+}
+
+export function resetForm() {
+  const addType = document.querySelector(".add__type"),
+        addDescription = document.querySelector(".add__description"),
+        addValue = document.querySelector(".add__value"),
+        addBtn = document.querySelector(".add__btn")
+
+  addType.value = "inc";
+  addDescription.value = "";
+  addValue.value = "";
+  
+  addType.className = "add__type";
+  addDescription.className = "add__description";
+  addValue.className = "add__value";
+  addBtn.className = "add__btn";
+}
