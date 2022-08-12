@@ -10,7 +10,7 @@ function BudgetItem ({ id, description, amount, total }) {
       <div className="right clearfix">
         <div className="item__value">{ formatStringAmount(amount) }</div>
         { total && <div className="item__percentage">{ formatPercentAmount(amount, total) }</div> }
-        <div className="item__delete" onClick={() => dispatch({ type: act.ACT_DELETE_INCOME, idDelete: id })}>
+        <div className="item__delete" onClick={() => dispatch(actDelete(id))}>
           <button className="item__delete--btn"><i className="ion-ios-close-outline" /></button>
         </div>
       </div>

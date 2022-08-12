@@ -20,7 +20,7 @@ function reducer(state = initState, action) {
         ...state.listDataIncome, {
             id          : uuidv4(),
             description : action.addDescription,
-            amount      : action.addType === "exp" ? action.addValue * -1 : action.addValue * 1
+            amount      : action.addType === "exp" ? action.addValue * -1 : action.addValue
           }
         ]
       )
