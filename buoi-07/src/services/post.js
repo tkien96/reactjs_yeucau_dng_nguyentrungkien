@@ -21,10 +21,10 @@ const postService = {
       orderby: 'post_views'
     });
   },
-  getArticleGeneral(perPage) {
+  getArticleGeneral(perPage, curentPage) {
     return postService.getList({
       per_page: perPage,
-      page: 1
+      page: curentPage
     });
   }
 }

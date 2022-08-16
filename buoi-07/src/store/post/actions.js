@@ -52,23 +52,25 @@ export function actFetchArticlePopularAsync() {
 }
 
 // *** ACT_FETCH_ARTICLE_GENERAL *** // 
-export function actFetchArticleGeneral(posts) {
+export function actFetchArticleGeneral(data, total) {
   return {
     type: ACT_FETCH_ARTICLE_GENERAL,
     payload: {
-      posts
+      data,
+      total
     }
   }
 }
 // Action Async
-export function actFetchArticleGeneralAsync(perPage) {
+export function actFetchArticleGeneralAsync(perPage, curentPage) {
   return async (dispatch) => {
     try {
-      const response = await postService.getArticleGeneral(perPage);
-      const posts = response.data.map(mappingPostData);
-      dispatch(actFetchArticleGeneral(posts));
+      const response = await postService.getArticleGeneral(perPage, curentPage);
+      const data = response.data.map(mappingPostData)
+      const total = response.headers['x-wp-total']
+      dispatch(actFetchArticleGeneral(data, total));
     } catch (err) {
-      // TODO
+      // return Promise.reject()
     }
   }
 }

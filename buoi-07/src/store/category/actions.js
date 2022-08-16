@@ -1,4 +1,4 @@
-import { mappingCategoryData } from "../../helpers";
+import { categoryData } from "../../helpers";
 import categoryService from "../../services/category";
 
 // Action Type
@@ -18,7 +18,7 @@ export function actFetchCategoriesAsync() {
   return async (dispatch) => {
     try {
       const response = await categoryService.getCategories();
-      const caterogires = response.data.map(mappingCategoryData);
+      const caterogires = categoryData(response.data);
       dispatch(actFetchCategories(caterogires));
     } catch (err) {
       // TODO

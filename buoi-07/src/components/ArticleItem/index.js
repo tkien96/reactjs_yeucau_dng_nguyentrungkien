@@ -22,18 +22,16 @@ export default function ArticleItem({
   })
 
   if (!post) return null;
-
   const title = post.title;
   const thumbnail = post.thumbnail;
   const author = post.author;
   const createdDate = post.createdDate;
   const slug = post.slug;
   const authorId = post.authorId;
-  const categories = post.categories;
+  const categories = post.categories
 
   const slugLink = '/post/' + slug;
   const authorLink = '/user/' + authorId;
-
 
   return (
     <article className={classes}>

@@ -10,16 +10,25 @@ function ArticleGeneral() {
 
   const dispatch = useDispatch()
   const generals = useSelector(state => state.Post.articleGeneral)
+  const total   = useSelector(state => state.Post.totalGeneral)
 
-  const [perPage, setPerPage] = useState(4)
+  //const [perPage, setPerPage] = useState(2)
+  const [curentPage, setCurentPage] = useState(1)
   const [loading, setLoading] = useState(false)
+  const [showLoad, setShowLoad] = useState(true)
 
   useEffect(() => {
-    dispatch(actFetchArticleGeneralAsync(perPage))
-  }, [perPage])
+    dispatch(actFetchArticleGeneralAsync(2, curentPage))
+    .then( ()=> {
+      setLoading(false)
+      if(generals.length > 0 && (generals.length + 1) >= total){ 
+        setShowLoad(false)
+      }
+    })
+  }, [curentPage])
 
   function handleClick() {
-    setPerPage(perPage + 2)
+    setCurentPage(curentPage + 1)
     setLoading(true)
   }
 
@@ -39,9 +48,7 @@ function ArticleGeneral() {
             })
           }
         </div>
-        <div className="text-center">
-          <Button onClick={handleClick} type="primary" size="large" loading={loading}>Tải thêm</Button>
-        </div>
+        <div className="text-center">{ showLoad && <Button onClick={handleClick} type="primary" size="large" loading={loading}>Tải thêm</Button> }</div>
       </div>
     </div>
   )

@@ -15,21 +15,15 @@ export function mappingPostData(post) {
   }
 }
 
-export function mappingCategoryData(item) {
-  return {
-    id: item.id,
-    link: item.link,
-    name: item.name,
-    slug: item.slug
-  }
-}
-
-export function setCategoriesData(posts, categories) {
-  posts.map(item => {
-    let category = categories.filter(value => item.categories.includes(value.id))
-    if(category.length){
-      item.categories = category
+export function categoryData(list) {
+  let data = {};
+  list.forEach(element => {
+    const key = element.id 
+    data[key] = {
+      id: element.id,
+      name: element.name,
+      slug: element.slug
     }
-  })
-  return posts
+  });
+  return data
 }

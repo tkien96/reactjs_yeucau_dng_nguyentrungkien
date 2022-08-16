@@ -5,23 +5,14 @@ import MainTitle from '../shared/MainTitle';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { actFetchArticlePopularAsync } from '../../store/post/actions';
-import { actFetchCategoriesAsync } from '../../store/category/actions';
-import { setCategoriesData } from "../../helpers";
 
 function ArticlePopular() {
   const dispatch = useDispatch()
-  
   const populars = useSelector(state => state.Post.articlePopular)
-  const categories = useSelector(state => state.Category.categories)
-  const list = setCategoriesData(populars, categories)
-  const last = list.pop()
-
   useEffect(() => {
     dispatch(actFetchArticlePopularAsync())
-    dispatch(actFetchCategoriesAsync())
   }, [dispatch])
   
-
   return (
     <div className="popular-news section bg-white-blue">
       <div className="tcl-container">
@@ -37,13 +28,14 @@ function ArticlePopular() {
           <div className="popular-news__list--left">
             <div className="popular-news__list--row">
               {
-                list.map((item, index) => {
-                  return (
-                    <div key={index} className="popular-news__list--card">
-                      <ArticleItem post={item} isStyleCard isShowCategoies isShowDesc />
-                    </div>
-                  )
-                })
+                <>
+                  <div key={0} className="popular-news__list--card">
+                    <ArticleItem post={populars[0]} isStyleCard isShowCategoies isShowDesc />
+                  </div>
+                  <div key={1} className="popular-news__list--card">
+                    <ArticleItem post={populars[1]} isStyleCard isShowCategoies isShowDesc />
+                  </div>
+                </>
               }
             </div>
           </div>
@@ -51,7 +43,7 @@ function ArticlePopular() {
             <div className="popular-news__list--row">
               {
                 <div className="popular-news__list--card">
-                  <ArticleItem post={last} isStyleCard isStyleRow isShowDesc />
+                  <ArticleItem post={populars[2]} isStyleCard isStyleRow isShowDesc />
                 </div>
               }
             </div>

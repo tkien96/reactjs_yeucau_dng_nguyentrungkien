@@ -7,6 +7,11 @@ import RegisterPage from './pages/RegisterPage';
 import SearchPage from './pages/SearchPage';
 import PostDetailPage from './pages/PostDetailPage';
 
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { actFetchCategoriesAsync } from './store/category/actions';
+
 import {
   BrowserRouter,
   Switch,
@@ -14,6 +19,12 @@ import {
 } from "react-router-dom";
 
 function App() {
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(actFetchCategoriesAsync())
+  }, [dispatch])
+  
   return (
     <BrowserRouter>
       <div className="wrapper-content">
