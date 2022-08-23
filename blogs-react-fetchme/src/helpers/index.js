@@ -4,7 +4,7 @@ export function getQueryStr(name) {
   return new URLSearchParams(window.location.search).get(name)
 }
 
-export function getToken(){
+export function getToken() {
   return localStorage.getItem('access_token');
 }
 
@@ -77,7 +77,7 @@ export function validateFormRegister({ value, name }) {
       error = MESSAGE_FORM_ERROR.email_required;
     }
 
-    if(!validateEmail(value)){
+    if (!validateEmail(value)) {
       error = MESSAGE_FORM_ERROR.rest_user_invalid_email;
     }
   }
@@ -92,3 +92,11 @@ export function validateEmail(email) {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 };
+
+export function RegExpKey(title, keyword) {
+  if (keyword !== '') {
+    return title.replace(new RegExp(keyword, 'ig'), function (match) {
+      return "<mark>" + match + "</mark>";
+    });
+  }
+}

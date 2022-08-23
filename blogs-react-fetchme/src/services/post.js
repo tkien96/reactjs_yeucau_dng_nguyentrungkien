@@ -4,8 +4,7 @@ const postService = {
   getList(params) {
     return api.call().get('/wp/v2/posts', {
       params: {
-        ...params,
-        lang: 'vi'
+        ...params
       }
     });
   },
@@ -17,11 +16,13 @@ const postService = {
   },
   getArticleGeneral({
     perPage = 2,
-    currentPage = 1
+    currentPage = 1,
+    search = ''
   } = {}) {
     return postService.getList({
       page: currentPage,
-      per_page: perPage
+      per_page: perPage,
+      search
     })
   },
   getArticlePopular() {

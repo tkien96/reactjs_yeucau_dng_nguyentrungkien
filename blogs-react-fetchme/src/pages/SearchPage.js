@@ -3,45 +3,60 @@ import ArticleItem from "../components/ArticleItem";
 import MainTitle from "../components/shared/MainTitle";
 import { getQueryStr } from "../helpers";
 
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actFetchArticleGeneralAsync } from "../store/post/actions";
+
 function SearchPage() {
   const queryStr = getQueryStr('q')
+
+  const dispatch = useDispatch();
+  const { list: posts, currentPage, totalPages } = useSelector(state => state.Post.articlePaging);
+  const [loading, setLoading] = useState(false);
+  const hasMorePost = currentPage < totalPages;
+
+  useEffect(() => {
+    handleLoadMore();
+  }, [dispatch]);
+
+  function handleLoadMore() {
+    if (loading) return;
+    setLoading(true);
+    const params = { currentPage: currentPage + 1, search: queryStr };
+    dispatch(actFetchArticleGeneralAsync(params)).then(() => {
+      setLoading(false);
+    })
+  }
 
   return (
     <div className="articles-list section">
       <div className="tcl-container">
   
-        <MainTitle type="search">10 kết quả tìm kiếm với từ khóa "{ queryStr }"</MainTitle>
-        
+        <MainTitle type="search">{totalPages} kết quả tìm kiếm với từ khóa "{ queryStr }"</MainTitle>
         <div className="tcl-row tcl-jc-center">
-          <div className="tcl-col-12 tcl-col-md-8">
-            <ArticleItem 
-              isStyleCard 
-              isShowCategoies 
-              isShowAvatar={false} 
-              isShowDesc={false} 
-            />
-          </div>
-          <div className="tcl-col-12 tcl-col-md-8">
-            <ArticleItem 
-              isStyleCard 
-              isShowCategoies 
-              isShowAvatar={false} 
-              isShowDesc={false} 
-            />
-          </div>
-          <div className="tcl-col-12 tcl-col-md-8">
-            <ArticleItem 
-              isStyleCard 
-              isShowCategoies 
-              isShowAvatar={false} 
-              isShowDesc={false} 
-            />
-          </div>
+          {
+            posts.map(item => {
+              return (
+                <div className="tcl-col-12 tcl-col-md-8" key={item.id}>
+                  <ArticleItem 
+                    isStyleCard 
+                    isShowCategoies 
+                    isShowAvatar={false} 
+                    isShowDesc={false} 
+                    post={item}
+                  />
+                </div>
+              )
+            })
+          }
         </div>
-
-        <div className="text-center">
-          <Button type="primary" size="large">Tải thêm</Button>
-        </div>
+        {
+          hasMorePost && (
+            <div className="text-center">
+              <Button type="primary" size="large" loading={loading} onClick={handleLoadMore}>Tải thêm</Button>
+            </div>
+          )
+        }
       </div>
     </div>
 

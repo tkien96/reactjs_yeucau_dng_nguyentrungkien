@@ -2,10 +2,9 @@ import { mappingPostData } from "../../helpers";
 import postService from "../../services/post";
 
 // Action Type
-export const ACT_FETCH_ARTICLE_LATEST = 'ACT_FETCH_ARTICLE_LATEST';
-export const ACT_FETCH_ARTICLE_POPULAR = 'ACT_FETCH_ARTICLE_POPULAR';
-export const ACT_FETCH_ARTICLE_GENERAL = 'ACT_FETCH_ARTICLE_GENERAL'
-
+export const ACT_FETCH_ARTICLE_LATEST   = 'ACT_FETCH_ARTICLE_LATEST'
+export const ACT_FETCH_ARTICLE_POPULAR  = 'ACT_FETCH_ARTICLE_POPULAR'
+export const ACT_FETCH_ARTICLE_GENERAL  = 'ACT_FETCH_ARTICLE_GENERAL'
 
 // Action
 export function actFetchArticleLatest(posts) {
@@ -39,7 +38,6 @@ export function actFetchArticleLatestAsync() {
   return async (dispatch) => {
     try {
       const response = await postService.getArticleLatest();
-      console.log(response);
       const posts = response.data.map(mappingPostData);
       dispatch(actFetchArticleLatest(posts));
     } catch (err) {
@@ -61,11 +59,13 @@ export function actFetchArticlePopularAsync() {
 }
 export function actFetchArticleGeneralAsync({
   perPage = 2,
-  currentPage = 1
+  currentPage = 1,
+  search = ''
 } = {}) {
   return async (dispatch) => {
+    console.log(search);
     try {
-      const response = await postService.getArticleGeneral({ perPage, currentPage });
+      const response = await postService.getArticleGeneral({ perPage, currentPage, search });
       const total = Number(response.headers['x-wp-total']);
       const totalPages = Number(response.headers['x-wp-totalpages']);
       const posts = response.data.map(mappingPostData);
