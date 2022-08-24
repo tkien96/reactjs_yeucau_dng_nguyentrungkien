@@ -1,4 +1,4 @@
-import { ACT_FETCH_ARTICLE_GENERAL, ACT_FETCH_ARTICLE_LATEST, ACT_FETCH_ARTICLE_POPULAR } from "./actions";
+import { ACT_FETCH_ARTICLE_GENERAL, ACT_FETCH_ARTICLE_LATEST, ACT_FETCH_ARTICLE_POPULAR, ACT_FETCH_DETAIL } from "./actions";
 
 const intState = {
   articleLatest: [],
@@ -7,11 +7,18 @@ const intState = {
   articlePaging: {
     list: [],
     currentPage: 1
-  }
+  },
+  detail: []
 }
 
 function reducer(postState = intState, action) {
   switch (action.type) {
+    case ACT_FETCH_DETAIL:
+      console.log(action);
+      return {
+        ...postState,
+        detail: action.payload.detail
+      }
     case ACT_FETCH_ARTICLE_LATEST:
       return {
         ...postState,

@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { actFetchAllCategoriesAsync } from './store/category/actions';
 import { actFetchMeAsync } from './store/auth/actions';
+import { actMenuAsync } from './store/menu/actions';
 import { getToken } from './helpers'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   const token = getToken()
 
   useEffect(() => {
+    dispatch(actMenuAsync());
     dispatch(actFetchAllCategoriesAsync());
     dispatch(actFetchMeAsync(token));
   }, [dispatch, token]);

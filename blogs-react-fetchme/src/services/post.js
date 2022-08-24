@@ -31,6 +31,13 @@ const postService = {
       per_page: 3,
       orderby: 'post_views'
     })
+  },
+  getArticleDetail(slug) {
+    return api.call().get('/wp/v2/posts', {
+      params: {
+        slug: slug
+      }
+    });
   }
 }
 

@@ -22,6 +22,15 @@ export function mappingPostData(post) {
   }
 }
 
+export function mappingMenuData(menu) {
+  return {
+    id: menu.ID,
+    title: menu.title,
+    url: menu.url,
+    childItems: menu.child_items ? menu.child_items.map(mappingMenuData) : []
+  }
+}
+
 export function handleHashCategoryById(categories) {
   const hashObj = {}
 

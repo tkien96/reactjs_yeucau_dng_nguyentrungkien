@@ -11,7 +11,7 @@ function SearchPage() {
   const queryStr = getQueryStr('q')
 
   const dispatch = useDispatch();
-  const { list: posts, currentPage, totalPages } = useSelector(state => state.Post.articlePaging);
+  const { list: posts, currentPage, totalPages, total } = useSelector(state => state.Post.articlePaging);
   const [loading, setLoading] = useState(false);
   const hasMorePost = currentPage < totalPages;
 
@@ -32,7 +32,7 @@ function SearchPage() {
     <div className="articles-list section">
       <div className="tcl-container">
   
-        <MainTitle type="search">{totalPages} kết quả tìm kiếm với từ khóa "{ queryStr }"</MainTitle>
+        <MainTitle type="search">{total} kết quả tìm kiếm với từ khóa "{ queryStr }"</MainTitle>
         <div className="tcl-row tcl-jc-center">
           {
             posts.map(item => {
