@@ -14,7 +14,6 @@ const intState = {
 function reducer(postState = intState, action) {
   switch (action.type) {
     case ACT_FETCH_DETAIL:
-      console.log(action);
       return {
         ...postState,
         detail: action.payload.detail

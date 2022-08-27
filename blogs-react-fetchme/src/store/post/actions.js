@@ -8,6 +8,15 @@ export const ACT_FETCH_ARTICLE_GENERAL  = 'ACT_FETCH_ARTICLE_GENERAL'
 export const ACT_FETCH_DETAIL  = 'ACT_FETCH_DETAIL'
 
 // Action
+export function actFetchDetail(detail) {
+  return {
+    type: ACT_FETCH_DETAIL,
+    payload: {
+      detail
+    }
+  }
+}
+
 export function actFetchArticleLatest(posts) {
   return {
     type: ACT_FETCH_ARTICLE_LATEST,
@@ -16,6 +25,7 @@ export function actFetchArticleLatest(posts) {
     }
   }
 }
+
 export function actFetchArticlePopular(posts) {
   return {
     type: ACT_FETCH_ARTICLE_POPULAR,
@@ -24,6 +34,7 @@ export function actFetchArticlePopular(posts) {
     }
   }
 }
+
 export function actFetchArticleGeneral({ posts, total, totalPages, currentPage }) {
   return {
     type: ACT_FETCH_ARTICLE_GENERAL,
@@ -42,8 +53,7 @@ export function actFetchDetailAsync({
   return async (dispatch) => {
     try {
       const response = await postService.getArticleDetail(slug);
-      const detail = response.data[0];
-      dispatch(actFetchDetail(detail));
+      dispatch(actFetchDetail(response.data));
     } catch (err) {
       // TODO 
     }
@@ -61,6 +71,7 @@ export function actFetchArticleLatestAsync() {
     }
   }
 }
+
 export function actFetchArticlePopularAsync() {
   return async (dispatch) => {
     try {

@@ -1,8 +1,9 @@
-import { ACT_LOGIN_SUCCESS, ACT_LOGOUT } from "./actions";
+import { ACT_LOGIN_SUCCESS, ACT_LOGOUT, ACT_GET_INFO } from "./actions";
 
 const intState = {
   token: '',
-  currentUser: null
+  currentUser: null,
+  info: []
 }
 
 function reducer(authState = intState, action) {
@@ -18,6 +19,11 @@ function reducer(authState = intState, action) {
       return {
         token: '',
         currentUser: null
+      }
+    case ACT_GET_INFO:
+      return {
+        ...authState,
+        info: action.payload.info
       }
     default:
       return authState;

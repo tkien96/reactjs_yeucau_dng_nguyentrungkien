@@ -1,6 +1,19 @@
 import './post-author.css'
+import { actGetInfoAsync } from "../../store/auth/actions";
+import {  useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function PostDetailAuthor() {
+function PostDetailAuthor({
+  userId
+}) {
+
+  const dispatch = useDispatch();
+  const info = useSelector(state => state.Auth.info);
+
+  useEffect(() => {
+    dispatch(actGetInfoAsync(userId)).then(() => {})
+  }, [dispatch]);
+
   return (
     <div className="post-author">
       <div className="post-author__bg-avatar">

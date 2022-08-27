@@ -4,6 +4,7 @@ import { MESSAGE_FORM_ERROR } from '../../constants'
 export const ACT_LOGIN_SUCCESS = 'ACT_LOGIN_SUCCESS';
 export const ACT_LOGOUT = 'ACT_LOGOUT';
 export const ACT_REGISTER = 'ACT_REGISTER';
+export const ACT_GET_INFO = 'ACT_GET_INFO';
 
 
 // Action
@@ -17,8 +18,36 @@ export function actLoginSuccess({ user, token }) {
   }
 }
 
+export function actGetInfo(info) {
+  return {
+    type: ACT_GET_INFO,
+    payload: {
+      info
+    }
+  }
+}
+
 
 // Action Async
+export function actGetInfoAsync(userId) {
+  return async dispatch => {
+    try {
+      const response = await authService.getInfo(userId);
+      console.log(response);
+      dispatch(actGetInfo(response.data))
+      return {
+        ok: true
+      }
+    } catch (error) {
+      return {
+        ok: false,
+        error: error
+      }
+    }
+  }
+}
+
+
 export function actFetchMeAsync(token) {
   return async dispatch => {
     try {

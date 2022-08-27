@@ -21,5 +21,8 @@ export const authService = {
       username, 
       password
     });
+  },
+  getInfo(userId) {
+    return api.call().get('/user/' + userId);
   }
 }

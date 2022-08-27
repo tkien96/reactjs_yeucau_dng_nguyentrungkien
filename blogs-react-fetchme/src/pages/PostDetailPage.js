@@ -6,32 +6,29 @@ import PostDetailSidebar from "../components/PostDetail/PostDetailSidebar"
 
 import {  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actFetchDetail } from "../store/post/actions";
+import { actFetchDetailAsync } from "../store/post/actions";
 
 function PostDetailPage() {
   const params = useParams()
   const dispatch = useDispatch();
   
-  const {detail} = useSelector(state => state.Post.detail);
+  const result = useSelector(state => state.Post.detail);
+  const detail = result[0];
 
   useEffect(() => {
-    dispatch(actFetchDetail(params)).then(() => {})
+    dispatch(actFetchDetailAsync(params)).then(() => {})
   }, [dispatch]);
 
   return (
     <main className="post-detail">
       <div className="spacing" />
-      
-      <PostDetailHead />
-      
+      <PostDetailHead title={ detail?.title.rendered } author={ detail?.author_data } date={detail?.date} commentCount={detail?.comment_count} viewCount={detail?.view_count} />
       <div className="spacing" />
-
       <div className="post-detail__fluid">
         <div className="tcl-container">
           <div className="post-detail__wrapper">
-            <PostDetailContent />
-
-            <PostDetailSidebar />
+            <PostDetailContent content={ detail?.content } />
+            <PostDetailSidebar userId={detail?.author} />
           </div>
         </div>
       </div>
